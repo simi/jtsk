@@ -8,8 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Jtsk::VERSION
   spec.authors       = ["Josef Šimánek"]
   spec.email         = ["josef.simanek@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Convert from JTSK to WGS48.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
