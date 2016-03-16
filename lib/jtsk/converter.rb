@@ -67,6 +67,8 @@ module JTSK
       JTSK::Wgs48Result.new(latitude, longitude)
     end
 
+    protected
+
     def wgs48_to_jtsk(latitude, longitude)
       if ((latitude < 40.0) || (latitude > 60.0) || (longitude < 5.0) || (longitude > 25.0))
         JTSK::JtskResult.new(0.0, 0.0)
