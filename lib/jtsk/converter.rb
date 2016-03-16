@@ -60,15 +60,15 @@ module JTSK
 
         delta = delta * 0.55;
         steps = steps + 4.0;
- 
+
         break if (((delta < 0.00001) || steps > 1000.0));
-      } 
+      }
 
       JTSK::Wgs48Result.new(latitude, longitude)
     end
 
     def wgs48_to_jtsk(latitude, longitude)
-      if ((latitude < 40.0) || (latitude > 60.0) || (longitude < 5.0) || (longitude > 25.0)) 
+      if ((latitude < 40.0) || (latitude > 60.0) || (longitude < 5.0) || (longitude > 25.0))
         JTSK::JtskResult.new(0.0, 0.0)
       else
         bessel = self.wgs48_to_bessel(latitude, longitude);
@@ -93,7 +93,7 @@ module JTSK
     end
 
     def bessel_to_jtsk(latitude, longitude)
-      a     = 6377397.15508
+      # a     = 6377397.15508
       e     = 0.081696831215303
       n     = 0.97992470462083
       rho_0 = 12310230.12797036
@@ -126,7 +126,7 @@ module JTSK
 
       eps = n * Math.atan(sinD / cosD)
       rho = rho_0 * Math.exp(-n * Math.log((1 + sinS) / cosS))
-      
+
       JTSK::JtskResult.new(rho * Math.cos(eps), rho * Math.sin(eps))
     end
 
