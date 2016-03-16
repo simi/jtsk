@@ -1,6 +1,6 @@
 # JTSK  [![Build Status](https://travis-ci.org/simi/jtsk.svg?branch=master)](https://travis-ci.org/simi/jtsk)
 
-Convert from JTSK to WGS48.
+Convert from JTSK to WGS84.
 
 Based on [JTSK Converter](https://github.com/josefzamrzla/JTSK_Converter) by [@josefzamrzla](https://github.com/josefzamrzla).
 
@@ -24,7 +24,7 @@ Or install it yourself as:
 converter = JTSK::Converter.new
 x = 1043033.89
 y = 738371.58
-result = converter.to_wgs48(x, y) #=> #<struct JTSK::Wgs48Result latitude=50.092696246901404, longitude=14.482746557404647>
+result = converter.to_wgs84(x, y) #=> #<struct JTSK::Wgs84Result latitude=50.092696246901404, longitude=14.482746557404647>
 result.latitude #=> 50.092696246901404
 result.longitude #=> 14.482746557404647
 ```

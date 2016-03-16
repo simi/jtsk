@@ -2,7 +2,13 @@ module JTSK
   class Converter
     EPS = 1e-4
 
-    def to_wgs48(x, y)
+    def to_wgs48(x,y)
+      warn "to_wgs84 is deprecated and will be removed in next version. Please use to_wgs84 method."
+      result = to_wgs84(x,y)
+      JTSK::Wgs48Result.new(result.latitude, result.longitude)
+    end
+
+    def to_wgs84(x, y)
       delta = 5.0
       latitude = 49.0
       longitude = 14.0
@@ -10,28 +16,28 @@ module JTSK
 
       loop {
 
-        jtsk = self.wgs48_to_jtsk(latitude - delta, longitude - delta)
+        jtsk = self.wgs84_to_jtsk(latitude - delta, longitude - delta)
         if(jtsk.x && jtsk.y)
           v1 = self.dist_points(jtsk.x, jtsk.y, x, y)
         else
           v1 = 1e32
         end
 
-        jtsk = self.wgs48_to_jtsk(latitude - delta, longitude + delta)
+        jtsk = self.wgs84_to_jtsk(latitude - delta, longitude + delta)
         if(jtsk.x && jtsk.y)
           v2 = self.dist_points(jtsk.x, jtsk.y, x, y)
         else
           v2 = 1e32
         end
 
-        jtsk = self.wgs48_to_jtsk(latitude + delta, longitude - delta)
+        jtsk = self.wgs84_to_jtsk(latitude + delta, longitude - delta)
         if(jtsk.x && jtsk.y)
           v3 = self.dist_points(jtsk.x, jtsk.y, x, y)
         else
           v3 = 1e32
         end
 
-        jtsk = self.wgs48_to_jtsk(latitude + delta, longitude + delta)
+        jtsk = self.wgs84_to_jtsk(latitude + delta, longitude + delta)
         if(jtsk.x && jtsk.y)
           v4 = self.dist_points(jtsk.x, jtsk.y, x, y)
         else
@@ -64,21 +70,21 @@ module JTSK
         break if (((delta < 0.00001) || steps > 1000.0));
       }
 
-      JTSK::Wgs48Result.new(latitude, longitude)
+      JTSK::Wgs84Result.new(latitude, longitude)
     end
 
     protected
 
-    def wgs48_to_jtsk(latitude, longitude)
+    def wgs84_to_jtsk(latitude, longitude)
       if ((latitude < 40.0) || (latitude > 60.0) || (longitude < 5.0) || (longitude > 25.0))
         JTSK::JtskResult.new(0.0, 0.0)
       else
-        bessel = self.wgs48_to_bessel(latitude, longitude);
+        bessel = self.wgs84_to_bessel(latitude, longitude);
         self.bessel_to_jtsk(bessel.latitude, bessel.longitude);
       end
     end
 
-    def wgs48_to_bessel(latitude, longitude, altitude = 0.0)
+    def wgs84_to_bessel(latitude, longitude, altitude = 0.0)
       b = deg2rad(latitude)
       l = deg2rad(longitude)
       h = altitude;
