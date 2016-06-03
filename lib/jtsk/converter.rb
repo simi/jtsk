@@ -3,7 +3,7 @@ module JTSK
     EPS = 1e-4
 
     def to_wgs48(x,y)
-      warn "to_wgs84 is deprecated and will be removed in next version. Please use to_wgs84 method."
+      warn "to_wgs48 is deprecated and will be removed in next version. Please use to_wgs84 method."
       result = to_wgs84(x,y)
       JTSK::Wgs48Result.new(result.latitude, result.longitude)
     end
